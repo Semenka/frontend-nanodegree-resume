@@ -34,7 +34,7 @@ var education={
 		"major":"Molecual biology",
 		"location":"Moscow",
 		"degree":"BA",
-		"dates":"01/09/2002-01/07/2004 ",
+		"dates":"01/09/2002-01/07/2004",
 		"url":"https://mipt.ru"
 
 		},
@@ -42,7 +42,7 @@ var education={
 		"major":"Petroleum engineering",
 		"location":"Moscow",
 		"degree":"MA",
-		"dates":"01/09/2004-01/07/2006 ",
+		"dates":"01/09/2004-01/07/2006",
 		"url":"https://mipt.ru"
 		}
 	],
@@ -68,37 +68,37 @@ var projects={
 		}
 	]
 };
-var formattedName=HTMLheaderName.replace("%data%",bio.name);
-$("#header").append(formattedName);
-var formattedRole=HTMLheaderRole.replace("%data%",bio.role);
-$("#header").append(formattedRole);
-
-//$("#header").append(HTMLcontactGeneric);
-var formattedMobile=HTMLmobile.replace("%data%",bio.contacts.mobile);
-$("#topContacts").append(formattedMobile);
-var formattedEmail=HTMLemail.replace("%data%",bio.contacts.email);
-$("#topContacts").append(formattedEmail);
-var formattedTwitter=HTMLtwitter.replace("%data%",bio.contacts.twitter);
-$("#topContacts").append(formattedTwitter);
-var formattedGithub=HTMLgithub.replace("%data%",bio.contacts.github);
-$("#topContacts").append(formattedGithub);
-var formattedLocation=HTMLlocation.replace("%data%",bio.contacts.location);
-$("#topContacts").append(formattedLocation);
-
-var formattedPic=HTMLbioPic.replace("%data%",bio.picture_url);
-$("#header").append(formattedPic);
-var formattedMsg=HTMLwelcomeMsg.replace("%data%",bio.welcomeMessage);
-$("#header").append(formattedMsg);
-
-if(bio.skills.length>0) {
- 	$("#header").append(HTMLskillsStart);
- 	for (skill in bio.skills){
- 		var formattedSkill=HTMLskills.replace("%data%", bio.skills[skill]);
-    	$("#skills").append(formattedSkill);
- 	};
+header.display=function(){
+	var formattedName=HTMLheaderName.replace("%data%",bio.name);
+	$("#header").append(formattedName);
+	var formattedRole=HTMLheaderRole.replace("%data%",bio.role);
+	$("#header").append(formattedRole);
+	var formattedMobile=HTMLmobile.replace("%data%",bio.contacts.mobile);
+	$("#topContacts").append(formattedMobile);
+	var formattedEmail=HTMLemail.replace("%data%",bio.contacts.email);
+	$("#topContacts").append(formattedEmail);
+	var formattedTwitter=HTMLtwitter.replace("%data%",bio.contacts.twitter);
+	$("#topContacts").append(formattedTwitter);
+	var formattedGithub=HTMLgithub.replace("%data%",bio.contacts.github);
+	$("#topContacts").append(formattedGithub);
+	var formattedLocation=HTMLlocation.replace("%data%",bio.contacts.location);
+	$("#topContacts").append(formattedLocation);
+	var formattedPic=HTMLbioPic.replace("%data%",bio.picture_url);
+	$("#header").append(formattedPic);
+	var formattedMsg=HTMLwelcomeMsg.replace("%data%",bio.welcomeMessage);
+	$("#header").append(formattedMsg);
+	if(bio.skills.length>0) {
+ 		$("#header").append(HTMLskillsStart);
+ 		for (skill in bio.skills){
+ 			var formattedSkill=HTMLskills.replace("%data%", bio.skills[skill]);
+    		$("#skills").append(formattedSkill);
+ 		};
+	};
 };
+header.display();
 
-function displayWork(){
+
+workExperience.display=function(){
 	for (job_id in work.jobs){
 		$("#workExperience").append(HTMLworkStart);
 		var formattedEmployer=HTMLworkEmployer.replace("%data%", work.jobs[job_id].employer);
@@ -113,14 +113,15 @@ function displayWork(){
 		$(".work-entry:last").append(formattedDescription);
 	};
 }
+workExperience.display();
 
-//$(document).click(function(loc){
-//	var x=loc.pageX;
-//	var y=loc.pageY;
-//	logClicks(x,y);
-//});
+$(document).click(function(loc){
+	var x=loc.pageX;
+	var y=loc.pageY;
+	logClicks(x,y);
+});
 
-displayWork();
+//displayWork();
 
 projects.display=function(){
 	for (project in projects.projects){
@@ -175,6 +176,5 @@ education.display();
 //$("#main").append(internationalizeButton);
 
 $("#mapDiv").append(googleMap);
-
 
 
