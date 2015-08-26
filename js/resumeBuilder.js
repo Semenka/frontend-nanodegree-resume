@@ -11,8 +11,8 @@ var bio = {
 		"github":"Semenka"
 	},
 	"skills": [
-	"Python","JS","Artificial Intellegence"
-	],
+		"Python","JS","Artificial Intellegence"
+		],
 
 	"picture_url":"images/AS.jpeg"
 };
@@ -30,59 +30,64 @@ var work={
 
 var education={
 	"schools": [
-		{"name":"MIPT",
-		"major":"Molecual biology",
-		"location":"Moscow",
-		"degree":"BA",
-		"dates":"01/09/2002-01/07/2004",
-		"url":"https://mipt.ru"
+		{
+			"name":"MIPT",
+			"major":"Molecual biology",
+			"location":"Moscow",
+			"degree":"BA",
+			"dates":"01/09/2002-01/07/2004",
+			"url":"https://mipt.ru"
 
 		},
-		{"name":"MIPT",
-		"major":"Petroleum engineering",
-		"location":"Moscow",
-		"degree":"MA",
-		"dates":"01/09/2004-01/07/2006",
-		"url":"https://mipt.ru"
+		{
+			"name":"MIPT",
+			"major":"Petroleum engineering",
+			"location":"Moscow",
+			"degree":"MA",
+			"dates":"01/09/2004-01/07/2006",
+			"url":"https://mipt.ru"
 		}
 	],
-	"online cources":[
-		{"title":"Artificial intellegince",
-		"school":"Stanford",
-		"dates":"01/09/2011-01/12/2011",
-		"url":"https://www.udacity.com/course/viewer#!/c-cs373/l-48739381"
+	"online_cources":[
+		{
+			"title":"Artificial intellegince",
+			"school":"Stanford",
+			"dates":"01/09/2011-01/12/2011",
+			"url":"https://www.udacity.com/course/viewer#!/c-cs373/l-48739381"
 		}
 
 	]
 };
 var projects={
 	"projects":[
-		{"title":"Field development",
-		"dates":"01/10/2008-01/05/2011",
-		"description":"Field development project",
-		"images":[
-				"images/rig.jpg",
-				"images/pad.jpg"
+		{
+			"title":"Field development",
+			"dates":"01/10/2008-01/05/2011",
+			"description":"Field development project",
+			"images":[
+					"images/rig.jpg",
+					"images/pad.jpg"
 				]
 
 		}
 	]
 };
-header.display=function(){
+bio.display=function(){
 	var formattedName=HTMLheaderName.replace("%data%",bio.name);
 	$("#header").append(formattedName);
 	var formattedRole=HTMLheaderRole.replace("%data%",bio.role);
 	$("#header").append(formattedRole);
+
 	var formattedMobile=HTMLmobile.replace("%data%",bio.contacts.mobile);
-	$("#topContacts").append(formattedMobile);
+	$("#topContacts").prepend(formattedMobile);
 	var formattedEmail=HTMLemail.replace("%data%",bio.contacts.email);
-	$("#topContacts").append(formattedEmail);
+	$("#topContacts").prepend(formattedEmail);
 	var formattedTwitter=HTMLtwitter.replace("%data%",bio.contacts.twitter);
-	$("#topContacts").append(formattedTwitter);
+	$("#topContacts").prepend(formattedTwitter);
 	var formattedGithub=HTMLgithub.replace("%data%",bio.contacts.github);
-	$("#topContacts").append(formattedGithub);
+	$("#topContacts").prepend(formattedGithub);
 	var formattedLocation=HTMLlocation.replace("%data%",bio.contacts.location);
-	$("#topContacts").append(formattedLocation);
+	$("#topContacts").prepend(formattedLocation);
 	var formattedPic=HTMLbioPic.replace("%data%",bio.picture_url);
 	$("#header").append(formattedPic);
 	var formattedMsg=HTMLwelcomeMsg.replace("%data%",bio.welcomeMessage);
@@ -94,11 +99,17 @@ header.display=function(){
     		$("#skills").append(formattedSkill);
  		};
 	};
+	$("#footerContacts").prepend(formattedMobile);
+	$("#footerContacts").append(formattedEmail);
+	$("#footerContacts").append(formattedTwitter);
+	$("#footerContacts").append(formattedGithub);
+	$("#footerContacts").append(formattedLocation);
+
 };
-header.display();
+bio.display();
 
 
-workExperience.display=function(){
+work.display=function(){
 	for (job_id in work.jobs){
 		$("#workExperience").append(HTMLworkStart);
 		var formattedEmployer=HTMLworkEmployer.replace("%data%", work.jobs[job_id].employer);
@@ -113,7 +124,7 @@ workExperience.display=function(){
 		$(".work-entry:last").append(formattedDescription);
 	};
 }
-workExperience.display();
+work.display();
 
 $(document).click(function(loc){
 	var x=loc.pageX;
@@ -156,24 +167,21 @@ education.display=function(){
 		var formattedLocation=HTMLschoolLocation.replace("%data%",education.schools[school].location);
 		$(".education-entry:last").append(formattedLocation);
 
-		//$(".education-entry:last").append(education.schools[school].url);
 	};
-
+	$("#education").append(HTMLonlineClasses);
+	for (course in education.online_cources){
+		var formattedTitle=HTMLonlineTitle.replace("%data%",education.online_cources[course].title);
+		$("#education").append(formattedTitle);
+		var formattedSchool=HTMLonlineSchool.replace("%data%",education.online_cources[course].school);
+		$("#education").append(formattedSchool);
+		var formattedDates=HTMLonlineDates.replace("%data%",education.online_cources[course].dates);
+		$("#education").append(formattedDates);
+		var formattedURL=HTMLonlineURL.replace("%data%",education.online_cources[course].url);
+		$("#education").append(formattedURL);
+	};
 };
 
 education.display();
-
-
-
-//function inName(name){
-//	var finalName = name;
-//    var names = name.trim().split(" ");
-//    names[1] = names[1].toUpperCase();
-//    names[0] = names[0].slice(0,1).toUpperCase() + names[0].slice(1).toLowerCase();
-//    finalName = names.join(" ");
-//    return finalName;
-//}
-//$("#main").append(internationalizeButton);
 
 $("#mapDiv").append(googleMap);
 
